@@ -12,6 +12,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        'movilstartIMG': "url('/home/pqAserrinrinrirn.png')",
+        'aserrinIMG': "url('/home/pqAserrinrinrirn.png')",
+        'pillofonIMG': "url('/home/pqAserrinrinrirn.png')",
+      },
     },
   },
   plugins: [],
