@@ -1,14 +1,14 @@
 export const cellularCarriers = [
     {
         name: "movilstart",
-        img: "url('/home/pqAserrinrinrirn.png')"
+        img: "url('/home/Movistartlogo.png')"
     },
     {
         name: "aserrin",
         img: "url('/home/pqAserrinrinrirn.png')"
     },
     {
-        name: "osos",
-        img: "url('/home/pqAserrinrinrirn.png')"
+        name: "ososCarpinteroTelec",
+        img: "url('/home/Osologo.png')"
     }
 ]

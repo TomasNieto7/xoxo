@@ -1,5 +1,5 @@
 "use client";
-import React, { useActionState, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RootLayout from "../layout";
 import HeaderHome from "@/components/home/HeaderHome";
 import { cellularCarriers } from "../../constants/home/cellularCarriers";
@@ -8,26 +8,48 @@ import Image from "next/image";
 import BalanceOptions from "@/components/balanceOptions/BalanceOptions";
 import CellphoneForm from "@/components/cellphoneForm/CellphoneForm";
 import { sendBalance } from "./action";
+import { FormState } from "../lib/definitions";
 
 const Page = () => {
-  const [state, action] = useActionState(sendBalance, undefined);
+  // Tu hook useActionState
+  const [state, setState] = useState<FormState>(undefined);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Otros hooks y estados
   const cellularCarriersOptions = cellularCarriers;
   const [showModal, setShowModal] = useState(false);
   const [showModalForm, setShowModalForm] = useState(false);
   const [balance, setBalance] = useState(0);
-  console.log(balance);
+  const [company, setCompany] = useState("");
 
+  // Manejo del envío del balance
   const handleSendBalance = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    formData.append("balance", balance.toString());
+    formData.append("company", company);
 
+    setIsLoading(true);
     try {
-      action(formData); // Asegúrate de que action devuelva la respuesta
-
+      const response = await sendBalance(formData);
+      setState(response);
+      console.log(isLoading);
     } catch (error) {
-      console.error("Error en el envío del formulario:", error);
+      console.error("Error en el envío del balance:", error);
+      setState({ res: { status: 500, message: "Error en el servidor" } });
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (state?.message) alert(state.message)
+    if (state?.res?.status === 404) alert("Telefono no existe");
+    else if (state?.res?.status === 200) {
+      alert("Recarga realizada");
+      setShowModalForm(false);
+    }
+  }, [state]);
 
   return (
     <RootLayout>
@@ -44,6 +66,7 @@ const Page = () => {
                 name={cellularCarrier.name}
                 img={cellularCarrier.img}
                 openModal={() => setShowModal(true)}
+                setCompany={() => setCompany(cellularCarrier.name)}
               />
             ))}
             <BalanceOptions
