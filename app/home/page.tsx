@@ -43,6 +43,8 @@ const Page = () => {
   };
 
   useEffect(() => {
+    console.log(state);
+    
     if (state?.message) alert(state.message)
     if (state?.res?.status === 404) alert("Telefono no existe");
     else if (state?.res?.status === 200) {

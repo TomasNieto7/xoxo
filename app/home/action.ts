@@ -33,8 +33,11 @@ export async function sendBalance(formData: FormData): Promise<FormState> {
       res = await patchBalanceMS(cellphoneForm, balanceForm);
       break;
     case "aserrin":
+      res = await patchBalanceAserrin(validatedFields.data.cellphone, balanceForm);
       break;
     case "ososCarpinteroTelec":
+      res = await patchBalanceOso(validatedFields.data.cellphone, balanceForm);
+      console.log(res);
       break;
 
     default:
@@ -55,6 +58,8 @@ export async function sendBalance(formData: FormData): Promise<FormState> {
     if (resTransaction.status === 201) {
       return { res: res };
     }
+  } else if (res.status === 404){
+    return {res: res};
   }
   return { message: "Algo salio mal" };
 }
@@ -124,10 +129,46 @@ const sendTransaction = async (
   }
 };
 
-// const dateNow = () => {
-//   const today = new Date();
-//   const day = today.getDate();
-//   const month = today.getMonth() + 1; // Los meses empiezan desde 0
-//   const year = today.getFullYear();
-//   return `${day}/${month}/${year}`;
-// };
+const patchBalanceAserrin = async (cellphone: string, balance: number) => {
+  try {
+    const res = await fetch("http://localhost:5000/aserrin", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ numero:cellphone, monto:balance }),
+    });
+
+    if (res.ok) {
+      return await res.json();
+    } else {
+      console.error("Error durante la solicitud PATCH:", res);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error durante fetch:", error);
+    return null;
+  }
+};
+
+const patchBalanceOso = async (cellphone: string, balance: number) => {
+  try {
+    const res = await fetch("http://localhost:8086/balances/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({phone_number: cellphone, amount: balance}),
+    });
+
+    if (res.ok) {
+      return await res.json();
+    } else {
+      console.error("Error durante la solicitud PATCH:", res);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error durante fetch:", error);
+    return null;
+  }
+};
