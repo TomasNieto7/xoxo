@@ -55,14 +55,15 @@ const Page = () => {
 
   return (
     <RootLayout>
-      <div className="w-screen h-screen flex flex-col">
-        <HeaderHome />
+    <div className="w-screen h-auto flex flex-col font-montserrat ">
+    <HeaderHome />
         <main className="flex flex-col w-full grow">
           <h2 className="text-xl font-bold w-full flex justify-center items-center h-20">
-            Seleccione una opcion
+            Seleccione una opción
           </h2>
-          <section className="grow min-w-[50vw] max-w-[70vw] flex justify-around items-center pl-10">
-            {cellularCarriersOptions.map((cellularCarrier, index) => (
+            <section className="grow min-w-[50vw] max-w-[100vw] flex justify-around items-center">
+            <div className="mx-10 flex flex-wrap gap-4">
+              {cellularCarriersOptions.map((cellularCarrier, index) => (
               <CompanyButton
                 key={index}
                 name={cellularCarrier.name}
@@ -70,7 +71,8 @@ const Page = () => {
                 openModal={() => setShowModal(true)}
                 setCompany={() => setCompany(cellularCarrier.name)}
               />
-            ))}
+              ))}
+            </div>
             <BalanceOptions
               show={showModal}
               onClose={() => setShowModal(false)}

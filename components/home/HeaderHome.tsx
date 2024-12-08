@@ -1,10 +1,13 @@
 import React from 'react'
 
+
 const HeaderHome = () => {
   return (
-    <div className='w-full h-[6rem] bg-[#479BA1] flex pl-6'>
-      <div className='w-24 h-full rounded-full bg-white flex justify-center items-center'>logo</div>
-      <h1 className='h-full flex justify-center items-center px-6 text-4xl text-white'>Recargas</h1>
+    <div className='w-screen h-16 bg-[#479BA1] flex'>
+      <div className='w-16 h-full flex justify-center items-center pl-6'>
+        <img src='home/recargaslogo.png' alt='logo' />
+      </div>
+      <h1 className='flex font-montserrat font-bold justify-center items-center px-4 text-3xl text-white'>Recargas</h1>
     </div>
   )
 }

@@ -30,8 +30,8 @@ const BalanceOptions = ({ show, onClose, setBalance, openModalForm }: BalanceOpt
         className="bg-white p-4 rounded shadow-lg w-[50vw] h-[50vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-lg font-bold w-full flex justify-center items-center h-20">
-          Seleccione una opcion
+        <h2 className="text-lg font-bold w-full flex justify-center items-center h-14">
+          Seleccione una opción
         </h2>
         <div className="w-full grow grid grid-cols-3 place-items-center">
           {balances.map((balance, index) => (
