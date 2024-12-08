@@ -15,8 +15,8 @@ const CompanyButton = ({ name, img, openModal, setCompany }: CompanyButtonProps)
   return (
     <button
       onClick={handleComapny}
-      className={`w-96 h-48 bg-white shadow-[3px_3px_20px_-5px_rgba(0,0,0,0.3)] rounded-md bg-cover bg-no-repeat`}
-      style={{ backgroundImage: img }}
+      className={`w-96 h-48 bg-white shadow-[3px_3px_20px_-5px_rgba(0,0,0,0.3)] rounded-md bg-cover bg-no-repeat flex items-center justify-center`}
+      style={{ backgroundImage: img, backgroundSize: 'contain', backgroundPosition: 'center' }}
       title={name}
     ></button>
   );

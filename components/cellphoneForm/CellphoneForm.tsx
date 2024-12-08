@@ -70,7 +70,7 @@ const CellphoneForm = ({ show, onClose, sendBalance, state }: CellphoneFormProps
               </div>
             )}
           </div>
-          <button>Realizar recarga</button>
+          <button className="bg-[#479BA1] px-3 py-2 rounded-md text-white font-montserrat font-semibold">Realizar recarga</button>
         </form>
       </div>
     </div>
