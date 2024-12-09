@@ -42,6 +42,12 @@ const Page = () => {
     }
   };
 
+  useEffect(()=>{
+    if (!showModalForm) {
+      setState(undefined)
+    }
+  },[showModalForm])
+
   useEffect(() => {
     console.log(state);
     
